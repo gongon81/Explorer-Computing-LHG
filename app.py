@@ -219,7 +219,7 @@ def cars_predict(df):
     st.success(f"예상 연비: **{mpg_pred:.2f} mpg** 🚘")
     
 def load_data():
-    df = pd.read_csv("./data/cars.csv")
+    df = pd.read_csv("data/cars.csv")
     return df
 
 def main():
