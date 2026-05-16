@@ -3,9 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 import plotly.express as px
+import os
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
+
 
 # 예: 맑은 고딕으로 설정
 matplotlib.rcParams['font.family'] = 'Malgun Gothic'
@@ -219,7 +221,27 @@ def cars_predict(df):
     st.success(f"예상 연비: **{mpg_pred:.2f} mpg** 🚘")
     
 def load_data():
-    df = pd.read_csv("data/cars.csv")
+    # 현재 실행 중인 app.py 파일의 실제 위치(폴더)를 가져옵니다.
+    base_path = os.path.dirname(__file__)
+    
+    # 두 가지 경우의 수를 모두 대비합니다.
+    path_with_folder = os.path.join(base_path, "data", "cars.csv") # data 폴더 안에 있을 때
+    path_root_folder = os.path.join(base_path, "cars.csv")        # app.py 바로 옆에 있을 때
+    
+    # 1. data/cars.csv 가 존재하는지 확인
+    if os.path.exists(path_with_folder):
+        file_path = path_with_folder
+    # 2. 루트 폴더에 cars.csv 가 존재하는지 확인
+    elif os.path.exists(path_root_folder):
+        file_path = path_root_folder
+    else:
+        # 파일이 둘 다 없으면 화면에 에러를 띄웁니다.
+        st.error(f"⚠️ 데이터 파일을 찾을 수 없습니다! 현재 위치: {base_path}")
+        st.info("GitHub 저장소에 'cars.csv' 파일이 올바르게 업로드되었는지 확인해주세요.")
+        return pd.DataFrame()
+        
+    # 안전하게 파일 읽기
+    df = pd.read_csv(file_path)
     return df
 
 def main():
