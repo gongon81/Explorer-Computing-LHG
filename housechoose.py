@@ -67,7 +67,7 @@ def load_subway(data_dir):
     return result.rename(columns={"역개수": "subway_count"}).set_index("자치구")["subway_count"]
 
 def load_crawled_economy(data_dir):
-    path = os.path.join(data_dir, "zigbang_monthly_rent.csv")
+    path = os.path.join(data_dir, "zigbang_monthly_rent1.csv")
     if os.path.exists(path):
         try:
             df = pd.read_csv(path, encoding="utf-8-sig")
