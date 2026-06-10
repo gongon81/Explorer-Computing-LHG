@@ -161,6 +161,33 @@ def page_home(df):
     col2.metric("🚌 평균 버스정류장 수", f"{int(df['bus_stop'].mean()):,}개")
     col3.metric("🌳 평균 공원 수",       f"{int(df['park_count'].mean()):,}개")
     col4.metric("🏠 평균 월세 시세",     f"{int(df['monthly_rent'].mean()):,}만원")
+    st.markdown("---")
+    
+    st.subheader("📂 프로젝트 분석 데이터 출처 안내")
+    st.write("본 가이드 대시보드는 공공데이터포털 및 웹 크롤링을 통해 수집한 신뢰도 높은 최신 지표 데이터를 기반으로 연산됩니다.")
+    
+    src_col1, src_col2 = st.columns(2)
+    
+    with src_col1:
+        st.markdown("""
+        #### 🔒 치안 (Safety)
+        * **CCTV 보유 현황**: [서울 열린데이터 광장] (https://data.seoul.go.kr/dataList/OA-2734/F/1/datasetView.do)
+        * **5대 범죄 발생 건수**: [서울 열린데이터 광장] (https://data.seoul.go.kr/dataList/316/S/2/datasetView.do)
+        
+        #### 🚌 교통 (Transportation)
+        * **시내버스 정류장 현황**: [서울 열린데이터 광장] (https://data.seoul.go.kr/dataList/OA-22187/F/1/datasetView.do)
+        * **지하철역 주소 및 개수**: [공공데이터포털] (https://www.data.go.kr/data/15081868/fileData.do)
+        """)
+        
+    with src_col2:
+        st.markdown("""
+        #### 🏠 경제 (Economy)
+        * **자치구별 평균 월세 시세**: [직방(Zigbang)] 웹사이트 실시간 매물 데이터 자체 파이썬 크롤링 연동 수집
+        
+        #### 🌳 녹지 (Greenery)
+        * **도시공원 보유 수 및 총 면적**: [서울 열린데이터 광장] (https://data.seoul.go.kr/dataList/10052/S/2/datasetView.do)
+        """)
+    st.caption("⚠️ 모든 지표 점수는 자치구별 최소/최대 편차를 고려하여 0~100점 사이로 정규화(Normalization) 가공 후 계산에 반영됩니다.")
 
 def page_stats(df):
     st.title("📊 동네 통계 분석")
