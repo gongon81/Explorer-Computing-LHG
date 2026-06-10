@@ -187,7 +187,7 @@ def page_home(df):
         #### 🌳 녹지 (Greenery)
         * **도시공원 보유 수 및 총 면적**: [서울 열린데이터 광장] (https://data.seoul.go.kr/dataList/10052/S/2/datasetView.do)
         """)
-    st.caption("⚠️ 모든 지표 점수는 자치구별 최소/최대 편차를 고려하여 0~100점 사이로 정규화(Normalization) 가공 후 계산에 반영됩니다.")
+    
 
 def page_stats(df):
     st.title("📊 동네 통계 분석")
